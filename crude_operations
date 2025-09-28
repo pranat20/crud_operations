@@ -1,0 +1,172 @@
+show dbs
+admin     81.00 KiB
+config    48.00 KiB
+hospital  234.00 KiB
+local     62.00 KiB
+db.createCollection('employee');
+{ ok: 1 }
+show collections
+employee
+db.employee.insertOne({empid:101,name:'pranat',contactno:[876744343],salary:70000});
+{
+  acknowledged: true,
+  insertedId: ObjectId('68d61ec2b272d6eabd861326')
+}
+db.employee.insertOne({empid:102,name:'anuj',contactno:[9078562846],salary:50000});
+{
+  acknowledged: true,
+  insertedId: ObjectId('68d61ff0b272d6eabd861327')
+}
+db.employee.insertOne({empid:103,name:'vedant',contactno:[1234567892],salary:30000});
+{
+  acknowledged: true,
+  insertedId: ObjectId('68d62009b272d6eabd861328')
+}
+db.employee.find()
+{
+  _id: ObjectId('68d61ec2b272d6eabd861326'),
+  empid: 101,
+  name: 'pranat',
+  contactno: [
+    8767443434
+  ],
+  salary: 70000
+}
+{
+  _id: ObjectId('68d61ff0b272d6eabd861327'),
+  empid: 102,
+  name: 'anuj',
+  contactno: [
+    9078562846
+  ],
+  salary: 50000
+}
+{
+  _id: ObjectId('68d62009b272d6eabd861328'),
+  empid: 103,
+  name: 'vedant',
+  contactno: [
+    1234567892
+  ],
+  salary: 30000
+}
+db.emp.find({empid:101})
+db.employee.find({empid:101})
+{
+  _id: ObjectId('68d61ec2b272d6eabd861326'),
+  empid: 101,
+  name: 'pranat',
+  contactno: [
+    8767443434
+  ],
+  salary: 70000
+}
+db.employee.update({empid:102},{$set:{name:'sumeet'}})
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.employee.find()
+{
+  _id: ObjectId('68d61ec2b272d6eabd861326'),
+  empid: 101,
+  name: 'pranat',
+  contactno: [
+    8767443434
+  ],
+  salary: 70000
+}
+{
+  _id: ObjectId('68d61ff0b272d6eabd861327'),
+  empid: 102,
+  name: 'sumeet',
+  contactno: [
+    9078562846
+  ],
+  salary: 50000
+}
+{
+  _id: ObjectId('68d62009b272d6eabd861328'),
+  empid: 103,
+  name: 'vedant',
+  contactno: [
+    1234567892
+  ],
+  salary: 30000
+}
+db.employee.find({$salary:>25000})
+SyntaxError: Unexpected token (1:26)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39memployee[33m.[39mfind({$salary[33m:[39m[33m>[39m[35m25000[39m})
+ [90m   |[39m                           [31m[1m^[22m[39m[0m
+db.employee.find({ salary: { $gt: 25000 } })
+{
+  _id: ObjectId('68d61ec2b272d6eabd861326'),
+  empid: 101,
+  name: 'pranat',
+  contactno: [
+    1234567890
+  ],
+  salary: 50000
+}
+{
+  _id: ObjectId('68d61ff0b272d6eabd861327'),
+  empid: 102,
+  name: 'sumeet',
+  contactno: [
+    9078562846
+  ],
+  salary: 50000
+}
+{
+  _id: ObjectId('68d62009b272d6eabd861328'),
+  empid: 103,
+  name: 'vedant',
+  contactno: [
+    1234567892
+  ],
+  salary: 30000
+}
+db.employee.find({ salary: { $gt: 45000 } })
+{
+  _id: ObjectId('68d61ec2b272d6eabd861326'),
+  empid: 101,
+  name: 'pranat',
+  contactno: [
+    8767443434
+  ],
+  salary: 70000
+}
+{
+  _id: ObjectId('68d61ec2b272d6eabd861327'),
+  empid: 101,
+  name: 'sumeet',
+  contactno: [
+    9078562846
+  ],
+  salary: 50000
+}
+
+db.employee.find({empid:{$ne:102}})
+{
+  _id: ObjectId('68d61ec2b272d6eabd861326'),
+  empid: 101,
+  name: 'pranat',
+  contactno: [
+    8767443434
+  ],
+  salary: 70000
+}
+{
+  _id: ObjectId('68d62009b272d6eabd861328'),
+  empid: 103,
+  name: 'vedant',
+  contactno: [
+    1234567892
+  ],
+  salary: 30000
+}
